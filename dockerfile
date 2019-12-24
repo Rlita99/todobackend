@@ -35,11 +35,16 @@ RUN apk add --no-cache python3 mariadb-client bash
 RUN addgroup -g 1000 app && \
     adduser -u 1000 -G app -D app
 
-#COPy and install application source and pre-built dpendencies
+#Copy and install application source and pre-built dpendencies
 COPY --from=test --chown=app:app /build /build
 COPY --from=test --chown=app:app /app /app
 RUN pip3 install -r /build/requirements.txt -f /build --no-index --no-cache-dir
 RUN rm -rf /build
+
+#Create public volume
+RUN mkdir /public
+RUN chown app:app /public
+VOLUME /public
 
 #set working directory and application user
 WORKDIR /app
