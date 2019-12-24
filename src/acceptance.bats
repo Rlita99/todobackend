@@ -1,6 +1,6 @@
 setup() {
   url=${APP_URL:-localhost:8000}
-  item='{"title": "youngjae balgol", "order": 1}'
+  item='{"title": "Wash the car", "order": 1}'
   location='Location: ([^[:space:]]*)'
   curl -X DELETE $url/todos
 }
